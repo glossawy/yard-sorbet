@@ -75,12 +75,15 @@ module YARDSorbet
         end
       end
 
+      # @see https://www.rubydoc.info/gems/yard/file/docs/Tags.md#order-dependent-lists Order-Dependent Lists
       sig { params(node: YARD::Parser::Ruby::AstNode).returns([String]) }
-      def convert_array(node)
-        # https://www.rubydoc.info/gems/yard/file/docs/Tags.md#order-dependent-lists
-        member_types = node.first.children.map { convert_node(_1) }
-        sequence = member_types.map { _1.size == 1 ? _1[0] : _1.to_s.tr('"', '') }.join(', ')
-        ["Array<(#{sequence})>"]
+      def convert_array(node) = ["Array<(#{sequence(node.first)})>"]
+
+      sig { params(node: T.nilable(YARD::Parser::Ruby::AstNode)).returns(String) }
+      def sequence(node)
+        return '' unless node
+
+        node.children.map { convert_node(_1) }.map { _1.size == 1 ? _1[0] : _1.to_s.tr('"', '') }.join(', ')
       end
 
       sig { params(node: YARD::Parser::Ruby::AstNode).returns([String]) }
