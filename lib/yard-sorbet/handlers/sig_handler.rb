@@ -64,21 +64,19 @@ module YARDSorbet
         attrs = namespace.attributes[scope][names[0]]
         return false if attrs.nil? || attrs.empty?
 
-        document_attr_methods(attrs.values.compact)
+        document_attrs(attrs.values.compact)
         attr_node.docstring = nil
         true
       end
 
       sig { params(method_objects: T::Array[YARD::CodeObjects::MethodObject]).void }
-      def document_attr_methods(method_objects)
-        method_objects.each { parse_node(_1, _1.docstring, include_params: false) }
-      end
+      def document_attrs(method_objects) =  method_objects.each { parse_node(_1, _1.docstring, include_params: false) }
 
       sig { params(attach_to: Documentable, docstring: T.nilable(String), include_params: T::Boolean).void }
       def parse_node(attach_to, docstring, include_params: true)
         existing_docstring = docstring.is_a?(YARD::Docstring)
         docstring, directives = Directives.extract_directives(docstring) unless existing_docstring
-        parse_sig(docstring, include_params: include_params)
+        parse_sig(docstring, include_params:)
         attach_to.docstring = docstring.to_raw
         Directives.add_directives(attach_to.docstring, directives) unless existing_docstring
       end

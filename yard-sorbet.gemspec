@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.summary = 'Create YARD docs from Sorbet type signatures'
   spec.description = 'A YARD plugin that incorporates Sorbet type information'
   spec.homepage = 'https://github.com/dduugg/yard-sorbet'
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.7.0')
+  spec.required_ruby_version = Gem::Requirement.new('>= 3.1')
 
   spec.metadata = {
     'bug_tracker_uri' => "#{spec.homepage}/issues",
@@ -27,6 +27,6 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir['lib/**/*', 'LICENSE']
 
-  spec.add_runtime_dependency 'sorbet-runtime'
-  spec.add_runtime_dependency 'yard'
+  spec.add_dependency 'sorbet-runtime'
+  spec.add_dependency 'yard'
 end

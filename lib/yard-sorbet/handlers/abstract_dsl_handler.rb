@@ -3,7 +3,7 @@
 
 module YARDSorbet
   module Handlers
-    # Apllies an `@abstract` tag to `abstract!`/`interface!` modules (if not alerady present).
+    # Applies an `@abstract` tag to `abstract!`/`interface!` modules (if not already present).
     class AbstractDSLHandler < YARD::Handlers::Ruby::Base
       extend T::Sig
 
@@ -15,7 +15,7 @@ module YARDSorbet
       #   The `@abstract` tag template
       TAG_TEXT = 'Subclasses must implement the `abstract` methods below.'
       # Extra text for class namespaces
-      CLASS_TAG_TEXT = T.let("It cannot be directly instantiated. #{TAG_TEXT}", String)
+      CLASS_TAG_TEXT = T.let("It cannot be directly instantiated. #{TAG_TEXT}".freeze, String)
 
       sig { void }
       def process

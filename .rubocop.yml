@@ -1,17 +1,22 @@
 ---
-require:
-  - rubocop-packaging
+plugins:
   - rubocop-performance
   - rubocop-rake
   - rubocop-rspec
+
+require:
+  - rubocop-packaging
   - rubocop-sorbet
 
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 3.1
 
 Layout/ClassStructure:
   Enabled: true
+# Cannot add type annotations to forwarded blocks
+Naming/BlockForwarding:
+  Enabled: false
 Naming/FileName:
   Exclude:
     - lib/yard-sorbet.rb

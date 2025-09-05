@@ -5,6 +5,14 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    groups:
+      rubocop:
+        patterns:
+          - "rubocop*"
+      sorbet:
+        patterns:
+          - "*sorbet*"
+          - "tapioca"
     labels:
       - "automerge"
       - "dependencies"

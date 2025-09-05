@@ -16,7 +16,7 @@ RSpec.describe YARDSorbet::Handlers::AbstractDSLHandler do
 
     it 'have abstract tag text string' do
       node = YARD::Registry.at('MyInterface')
-      expect(node.tags.first.text).to eq(YARDSorbet::Handlers::AbstractDSLHandler::TAG_TEXT)
+      expect(node.tags.first.text).to(eq(YARDSorbet::Handlers::AbstractDSLHandler::TAG_TEXT))
     end
   end
 
@@ -35,7 +35,7 @@ RSpec.describe YARDSorbet::Handlers::AbstractDSLHandler do
 
     it 'have abstract tag text string' do
       node = YARD::Registry.at('MyAbstractClass')
-      expect(node.tag(:abstract).text).to eq(YARDSorbet::Handlers::AbstractDSLHandler::CLASS_TAG_TEXT)
+      expect(node.tag(:abstract).text).to(eq(YARDSorbet::Handlers::AbstractDSLHandler::CLASS_TAG_TEXT))
     end
   end
 

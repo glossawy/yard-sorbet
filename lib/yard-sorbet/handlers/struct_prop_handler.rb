@@ -35,15 +35,11 @@ module YARDSorbet
       end
 
       sig { returns(T::Boolean) }
-      def immutable?
-        statement.method_name(true) == :const || kw_arg('immutable:') == 'true'
-      end
+      def immutable? = statement.method_name(true) == :const || kw_arg('immutable:') == 'true'
 
       # @return the value passed to the keyword argument, or nil
       sig { params(kwd: String).returns(T.nilable(String)) }
-      def kw_arg(kwd)
-        params[2]&.find { _1[0].source == kwd }&.[](1)&.source
-      end
+      def kw_arg(kwd) = params[2]&.find { _1[0].source == kwd }&.[](1)&.source
 
       sig { params(name: String).returns(TStructProp) }
       def make_prop(name)
@@ -57,16 +53,14 @@ module YARDSorbet
       end
 
       sig { returns(T::Array[YARD::Parser::Ruby::AstNode]) }
-      def params
-        @params ||= T.let(statement.parameters(false), T.nilable(T::Array[YARD::Parser::Ruby::AstNode]))
-      end
+      def params = @params ||= T.let(statement.parameters(false), T.nilable(T::Array[YARD::Parser::Ruby::AstNode]))
 
       # Register the field explicitly as an attribute.
       sig { params(object: YARD::CodeObjects::MethodObject, name: String).void }
       def register_attrs(object, name)
         write = immutable? ? nil : object
         # Create the virtual attribute in our current scope
-        namespace.attributes[scope][name] ||= SymbolHash[read: object, write: write]
+        namespace.attributes[scope][name] ||= SymbolHash[read: object, write:]
       end
 
       # Store the prop for use in the constructor definition
